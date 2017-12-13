@@ -1,6 +1,8 @@
 pipeline {
     agent any 
-
+	parameters {
+        string(name: 'RELEASE', defaultValue: 'no', description: 'RELEASE?')
+    }
     stages {
         stage('SCM Checkout') {
 	    steps {
@@ -11,7 +13,7 @@ pipeline {
             steps { 
                 sh 'npm install'
 		sh 'grunt'
-		sh 'echo ${params.configuration}' 
+		sh 'echo ${params.RELEASE}' 
             }
         }
     }
